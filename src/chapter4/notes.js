@@ -1,4 +1,4 @@
-const JOURNAL = require("./journal");
+const JOURNAL = require("./journal.js");
 
 require("./journal.js");
 
