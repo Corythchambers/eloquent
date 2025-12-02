@@ -32,4 +32,34 @@ export class Group {
   has(value) {
     return this.#collection.indexOf(value) !== -1;
   }
+
+  [Symbol.iterator]() {
+    return new IterableGrop(this);
+  }
+
+  _getCollection() {
+    return this.#collection;
+  }
+}
+
+class IterableGrop {
+  constructor(group) {
+    this.group = group;
+    this.index = 0;
+  }
+
+  next() {
+    let collection = this.group._getCollection();
+
+    if (this.index >= collection.length) {
+      return { done: true };
+    }
+    let value = collection[this.index];
+    this.index++;
+    return { value, done: false };
+  }
+}
+
+for (let value of Group.from(["a", "b", "c"])) {
+  console.log(value);
 }
